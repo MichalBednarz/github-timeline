@@ -1,0 +1,32 @@
+@(form: Form[RepositoryForm.Data], post: Call)(implicit request: MessagesRequest[AnyContent])
+
+@main("Repository") {
+    <div>Repository</div>
+
+        @request.flash.data.map{ case (name, value) =>
+        <div>@name: @value</div>
+        }
+
+        @if(form.hasGlobalErrors) {
+            @form.globalErrors.map { error: FormError =>
+                <div>
+                    @error.key: @error.message
+                </div>
+            }
+        }
+
+    @helper.form(post) {
+      @helper.CSRF.formField
+
+      @helper.inputText(form("name"))
+
+        @helper.inputText(form("owner"))
+
+      @helper.select(
+        form("node"),
+          Seq(("Issue", "Issue"), ("PullRequest", "PullRequest"), ("CommitComment", "CommitComment"))
+      )
+
+        <button>Fetch Repository Nodes</button>
+    }
+}

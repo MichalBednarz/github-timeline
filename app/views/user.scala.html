@@ -1,0 +1,18 @@
+@(form: Form[UserForm.Data], post: Call)(implicit request: MessagesRequest[AnyContent])
+
+@main("User") {
+    <div>User</div>
+
+    @helper.form(post) {
+        @helper.CSRF.formField
+
+        @helper.inputText(form("login"))
+
+        @helper.select(
+            form("node"),
+            Seq(("Issue", "Issue"), ("PullRequest", "PullRequest"), ("CommitComment", "CommitComment"))
+        )
+
+        <button>Fetch User Nodes</button>
+    }
+}

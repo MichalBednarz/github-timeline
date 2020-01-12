@@ -1,0 +1,15 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /github/repository                    controllers.GithubController.repository
+GET     /github/user                          controllers.GithubController.user
+GET     /github/:query                        controllers.GithubController.fetchNodes(query)
+POST    /github/repository                    controllers.GithubController.submitRepository
+POST    /github/user                          controllers.GithubController.submitUser
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
